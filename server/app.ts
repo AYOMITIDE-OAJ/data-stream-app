@@ -1,9 +1,19 @@
 import express from 'express';
+import cors from 'cors';
+
 
 import projects from './routes/projects';
 
 const app = express();
-const port = process.env.PORT || 5000;
+
+// Enable CORS for all origins
+app.use(cors());
+
+const port = process.env.PORT || 3000;
 
 app.use('/projects', projects);
-app.listen(port);
+
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});

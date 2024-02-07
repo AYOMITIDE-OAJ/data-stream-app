@@ -58,6 +58,29 @@ router.get('/:projectId/posts', async (req, res) => {
   }
 });
 
+// Get a single post by UUID
+router.get('/:projectId/posts/:postId', async (req, res) => {
+   let client: PoolClient;
+
+   try {
+    client = await pool.connect();
+    const { projectId, postId } = req.params;
+    const postQuery = await client.query(
+      "SELECT * FROM post WHERE project_id = $1 AND id = $2",
+      [projectId, postId],
+      );
+      if (postQuery.rows.length === 1) {
+        res.json({ post: postToCamelCase(postQuery.rows[0]) });
+      } else {
+        res.send(404);
+      }
+    } catch (e) {
+      res.status(500).send(e);
+    } finally {
+      if (client) client.release();
+   }
+})
+
 type Project = {
   id: string;
   created_at: Date;
