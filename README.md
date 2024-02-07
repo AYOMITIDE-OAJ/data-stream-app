@@ -1,5 +1,7 @@
 # Data Stream Full-stack Code Challenge
-    This project is a React-based frontend for the Data Stream App. It showcases a UI for displaying projects and their associated data streams in a paginated manner.
+
+This project is a React-based frontend for the Data Stream App. It showcases a UI for displaying projects and their associated data streams in a paginated manner.
+
 ## Getting Started
 
 Follow these steps to set up and run the project locally.
