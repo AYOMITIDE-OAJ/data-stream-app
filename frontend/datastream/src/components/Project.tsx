@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Typography, Pagination, Stack, CircularProgress, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, Typography, Pagination, Stack, CircularProgress, Grid, PaginationItem } from '@mui/material';
 import { fetchProject, fetchPosts } from '../services/ProjectService';
 import { format } from 'date-fns'; // For formatting dates
 
@@ -50,6 +51,7 @@ const Project: React.FC<ProjectProps> = ({ projectId }) => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
+    
   };
 
   return (
@@ -81,7 +83,17 @@ const Project: React.FC<ProjectProps> = ({ projectId }) => {
             ))}
           </Grid>
           <Stack spacing={2} alignItems="center" marginTop={2}>
-            <Pagination count={totalPages} page={page} onChange={handleChange} />
+            <Pagination 
+            count={totalPages} 
+            page={page} 
+            onChange={handleChange} 
+            variant="outlined" 
+            color="primary" 
+            boundaryCount={1} // Show first and last page numbers
+            siblingCount={2} // Show 2 page numbers before and after the current page
+            showFirstButton
+            showLastButton
+            />
           </Stack>
         </>
       )}
