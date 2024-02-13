@@ -72,7 +72,7 @@ router.get('/:projectId/posts/:postId', async (req, res) => {
       if (postQuery.rows.length === 1) {
         res.json({ post: postToCamelCase(postQuery.rows[0]) });
       } else {
-        res.send(404);
+        res.status(404).send("Post doesn't exist");
       }
     } catch (e) {
       res.status(500).send(e);
